@@ -1,0 +1,34 @@
+﻿<Window x:Name="window" x:Class="CefSharpTest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CefSharpTest"
+        xmlns:viewModel="clr-namespace:CefSharpTest.ViewModels"
+        xmlns:cefSharp="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance viewModel:MainViewModel}"
+        Title="MainWindow" Height="450" Width="800" >
+    <StackPanel x:Name="stackPanel">
+        <Menu VerticalAlignment="Top" >
+            <MenuItem Header="Tabs">
+                <MenuItem Header="New tab" Command="{Binding NewTab}"/>
+            </MenuItem>
+        </Menu>
+        <TabControl ItemsSource="{Binding Tabs}" 
+                    VerticalContentAlignment="Stretch" 
+                    HorizontalContentAlignment="Stretch" 
+                    Height="{Binding ActualHeight, ElementName=window, Mode=OneWay}">
+            <TabControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Header}" />
+                </DataTemplate>
+            </TabControl.ItemTemplate>
+            <TabControl.ContentTemplate>
+                <DataTemplate>
+                    <ContentControl Content="{Binding Browser}"/>
+                </DataTemplate>
+            </TabControl.ContentTemplate>
+        </TabControl>
+    </StackPanel>
+</Window>
