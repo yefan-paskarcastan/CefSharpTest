@@ -21,7 +21,12 @@
                     Height="{Binding ActualHeight, ElementName=window, Mode=OneWay}">
             <TabControl.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Header}" />
+                    <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <TextBlock Text="{Binding Header}" />
+                        <Button Margin="10,0,0,0" Width="20" Command="{Binding CloseTab}">
+                            <TextBlock Text="X"/>
+                        </Button>
+                    </WrapPanel>
                 </DataTemplate>
             </TabControl.ItemTemplate>
             <TabControl.ContentTemplate>

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace CefSharpTest.ViewModels
+namespace CefSharpTest.Data
 {
     public class Command : ICommand
     {

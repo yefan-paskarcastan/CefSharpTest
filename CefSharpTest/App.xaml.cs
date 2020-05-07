@@ -9,6 +9,9 @@ using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using CefSharpTest.ViewModels;
 using CefSharpTest.Services;
+using CefSharpTest.Data;
+using System.Collections.ObjectModel;
+using CefSharpTest.Interfaces;
 
 namespace CefSharpTest
 {
@@ -20,6 +23,7 @@ namespace CefSharpTest
         public App()
         {
             container = new WindsorContainer();
+            RegisterComponents();
             RegisterViewModels();
         }
 
@@ -31,6 +35,12 @@ namespace CefSharpTest
 
             window.DataContext = mainViewModel;
             window.Show();
+        }
+
+        void RegisterComponents()
+        {
+            container.RegisterSingleton<IList<TabItem>, ObservableCollection<TabItem>>();
+            container.RegisterService<ITabManager, TabManager>();
         }
 
         void RegisterViewModels()
