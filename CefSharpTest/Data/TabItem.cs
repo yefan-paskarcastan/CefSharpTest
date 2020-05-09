@@ -12,7 +12,7 @@ using System.Diagnostics;
 
 namespace CefSharpTest.Data
 {
-    public class TabItem
+    public class TabItem : BaseNotify
     {
         public TabItem()
         {
@@ -81,7 +81,26 @@ namespace CefSharpTest.Data
 
         void OnRunJS()
         {
-            Browser.ExecuteScriptAsync("alert(\"It's work!!!\");");
+            string script = @"temp = function()
+                            {
+                                return document.getElementsByClassName(""onboarding-ed__title js-onboarding-ed-balance-text"")[0].textContent;
+                            };
+                            temp();";
+
+            if (!Browser.IsLoading)
+            {
+                Browser.EvaluateScriptAsync(script).ContinueWith(x =>
+                {
+                    var response = x.Result;
+
+                    if (response.Success && response.Result != null)
+                    {
+                        var className = (string)response.Result;
+                        Header = className;
+                        OnPropertyChanged("Header");
+                    }
+                });
+            }
         }
     }
 }

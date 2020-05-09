@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:CefSharpTest"
         xmlns:viewModel="clr-namespace:CefSharpTest.ViewModels"
         xmlns:cefSharp="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
+        xmlns:MouseBehaviours="clr-namespace:CefSharpTest.MouseBehaviours"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance viewModel:MainViewModel}"
         Title="MainWindow" Height="450" Width="800" >
@@ -34,7 +35,8 @@
             </TabControl.ItemTemplate>
             <TabControl.ContentTemplate>
                 <DataTemplate>
-                    <ContentControl Content="{Binding Browser}"/>
+                    <ContentControl Content="{Binding Browser}"
+                                    MouseBehaviours:MouseBehaviour.MouseMoveCommand="{Binding RunJS}"/>
                 </DataTemplate>
             </TabControl.ContentTemplate>
         </TabControl>
