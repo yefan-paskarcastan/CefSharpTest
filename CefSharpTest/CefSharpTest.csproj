@@ -93,6 +93,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Data\BaseNotify.cs" />
+    <Compile Include="Data\Contur.cs" />
+    <Compile Include="Data\ContursManager.cs" />
     <Compile Include="Data\TabItem.cs" />
     <Compile Include="Data\TabManager.cs" />
     <Compile Include="Interfaces\ITabManager.cs" />
@@ -141,7 +143,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

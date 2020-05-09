@@ -16,6 +16,8 @@ namespace CefSharpTest.ViewModels
         {
             Tabs = tabItems;
             NewTab = tabManager.NewTab;
+
+            var ctr = new ContursManager();
         }
 
         public IList<TabItem> Tabs { get; set; } 
