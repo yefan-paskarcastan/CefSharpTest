@@ -30,6 +30,7 @@ namespace CefSharpTest.Data
             Browser.RequestContext = new RequestContext(settings);
             Browser.Address = "https://duckduckgo.com";
             CloseTab = new Command(OnCloseTab);
+            RunJS = new Command(OnRunJS);
         }
 
         /// <summary>
@@ -62,6 +63,8 @@ namespace CefSharpTest.Data
         /// </summary>
         public ICommand CloseTab { get; set; }
 
+        public ICommand RunJS { get; private set; }
+
         /// <summary>
         /// Событие возникает при вызове команды закрытие вкладки
         /// </summary>
@@ -74,6 +77,11 @@ namespace CefSharpTest.Data
         {
             Browser.Dispose();
             CloseTabEvent?.Invoke(this);
+        }
+
+        void OnRunJS()
+        {
+            Browser.ExecuteScriptAsync("alert(\"It's work!!!\");");
         }
     }
 }

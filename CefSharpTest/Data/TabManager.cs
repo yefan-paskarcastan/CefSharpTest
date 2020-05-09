@@ -22,6 +22,9 @@ namespace CefSharpTest.Data
             NewTab = new Command(OnNewTab);
         }
 
+        /// <summary>
+        /// Команда открытия новой вкладки
+        /// </summary>
         public ICommand NewTab { get; private set; }
 
         /// <summary>
