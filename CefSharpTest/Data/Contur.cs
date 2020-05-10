@@ -24,7 +24,7 @@ namespace CefSharpTest.Data
         /// <summary>
         /// Адрес контура
         /// </summary>
-        public string Addres { get; set; }
+        public string Address { get; set; }
 
         /// <summary>
         /// Пользовательская папка для хранение кэша 

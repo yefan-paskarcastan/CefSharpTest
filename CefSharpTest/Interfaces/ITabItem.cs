@@ -22,11 +22,6 @@ namespace CefSharpTest.Interfaces
         string Header { get; set; }
 
         /// <summary>
-        /// Адрес вкладки
-        /// </summary>
-        string Addrees { get; set; }
-
-        /// <summary>
         /// Экземпляр бразуера для вкладки
         /// </summary>
         ChromiumWebBrowser Browser { get; }

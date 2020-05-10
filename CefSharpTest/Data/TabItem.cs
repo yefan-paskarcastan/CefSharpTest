@@ -30,7 +30,7 @@ namespace CefSharpTest.Data
             Browser = new ChromiumWebBrowser();
             Browser.RequestContext = new RequestContext(settings);
             Header = contur.Header;
-            Browser.Address = contur.Addres;
+            Browser.Address = contur.Address;
             CloseTab = new Command(OnCloseTab);
             RunJS = new Command(OnRunJS);
         }
@@ -49,8 +49,6 @@ namespace CefSharpTest.Data
         /// Заголовок вкадки
         /// </summary>
         public string Header { get; set; }
-
-        public string Addrees { get; set; }
 
         /// <summary>
         /// Экземпляр бразуера для вкладки

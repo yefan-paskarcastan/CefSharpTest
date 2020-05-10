@@ -76,10 +76,10 @@ namespace CefSharpTest.Data
         /// </summary>
         void CreateExampleJSON()
         {
-            var duck = new Contur() { Header = "DuckDuckGo", Addres = "duckduckgo.com" };
-            var google = new Contur() { Header = "Google", Addres = "google.com" };
-            var ya = new Contur() { Header = "Yandex", Addres = "yandex.com" };
-            var bing = new Contur() { Header = "Bing", Addres = "bing.com" };
+            var duck = new Contur() { Header = "DuckDuckGo", Address = "duckduckgo.com" };
+            var google = new Contur() { Header = "Google", Address = "google.com" };
+            var ya = new Contur() { Header = "Yandex", Address = "yandex.com" };
+            var bing = new Contur() { Header = "Bing", Address = "bing.com" };
 
             var listConturs = new List<Contur>();
             listConturs.Add(duck);

@@ -17,7 +17,7 @@ namespace CefSharpTest.Interfaces
         /// <summary>
         /// Адрес контура
         /// </summary>
-        string Addres { get; set; }
+        string Address { get; set; }
 
         /// <summary>
         /// Пользовательская папка для хранение кэша 
