@@ -13,21 +13,23 @@ namespace CefSharpTest.ViewModels
     public class MainViewModel : BaseViewModel
     {
         public MainViewModel(IList<ITabItem> tabItems, 
-                             ITabManager tabManager,
                              IList<IContur> conturs,
                              IContursManager contursManager)
         {
             Tabs = tabItems;
             Conturs = conturs;
-            NewTab = tabManager.NewTab;
             RefreshConturs = contursManager.RefreshConturs;
         }
 
+        /// <summary>
+        /// Список открытых вкладок
+        /// </summary>
         public IList<ITabItem> Tabs { get; set; } 
 
+        /// <summary>
+        /// Список открытых контуров
+        /// </summary>
         public IList<IContur> Conturs { get; set; }
-
-        public ICommand NewTab { get; set; }
 
         /// <summary>
         /// Перечитать список контуров из файла

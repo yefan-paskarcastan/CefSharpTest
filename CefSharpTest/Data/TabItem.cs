@@ -15,7 +15,7 @@ namespace CefSharpTest.Data
 {
     public class TabItem : BaseNotify, ITabItem
     {
-        public TabItem()
+        public TabItem(IContur contur)
         {
             string currDir = AppDomain.CurrentDomain.BaseDirectory;
             Index = _indexCounter++;
@@ -29,7 +29,8 @@ namespace CefSharpTest.Data
 
             Browser = new ChromiumWebBrowser();
             Browser.RequestContext = new RequestContext(settings);
-            Browser.Address = "https://duckduckgo.com";
+            Header = contur.Header;
+            Browser.Address = contur.Addres;
             CloseTab = new Command(OnCloseTab);
             RunJS = new Command(OnRunJS);
         }
@@ -49,9 +50,6 @@ namespace CefSharpTest.Data
         /// </summary>
         public string Header { get; set; }
 
-        /// <summary>
-        /// Адрес вкладки
-        /// </summary>
         public string Addrees { get; set; }
 
         /// <summary>

@@ -4,6 +4,10 @@ namespace CefSharpTest.Interfaces
 {
     public interface ITabManager
     {
-        ICommand NewTab { get; }
+        /// <summary>
+        /// Добавляет новую вкладку
+        /// </summary>
+        /// <param name="contur">Параметры контура</param>
+        void AddTab(IContur contur);
     }
 }

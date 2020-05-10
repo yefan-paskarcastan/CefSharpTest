@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace CefSharpTest.Interfaces
 {
@@ -22,5 +23,15 @@ namespace CefSharpTest.Interfaces
         /// Пользовательская папка для хранение кэша 
         /// </summary>
         string CustomCacheDir { get; set; }
+
+        /// <summary>
+        /// Отрыть выбранный контур
+        /// </summary>
+        ICommand Open { get; }
+
+        /// <summary>
+        /// Событие возникает при вызове команды открытия контура
+        /// </summary>
+        event Action<IContur> OpenEvent;
     }
 }

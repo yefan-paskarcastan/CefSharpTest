@@ -19,30 +19,24 @@ namespace CefSharpTest.Data
                 Directory.Delete(currDir + "\\Cache", true);
 
             _tabs = tabItems;
-            NewTab = new Command(OnNewTab);
         }
 
         /// <summary>
-        /// Команда открытия новой вкладки
+        /// Добавляет новую вкладку
         /// </summary>
-        public ICommand NewTab { get; private set; }
+        /// <param name="contur">Параметры контура</param>
+        public void AddTab(IContur contur)
+        {
+            var tabItem = new TabItem(contur);
+            tabItem.CloseTabEvent += TabItem_CloseTabEvent;
+
+            _tabs.Add(tabItem);
+        }
 
         /// <summary>
         /// Коллекция вкладок
         /// </summary>
         IList<ITabItem> _tabs;
-
-        /// <summary>
-        /// Обработчик добавления новой вкладки
-        /// </summary>
-        void OnNewTab()
-        {
-            var tabItem = new TabItem();
-            tabItem.Header = tabItem.Index.ToString();
-            tabItem.CloseTabEvent += TabItem_CloseTabEvent;
-
-            _tabs.Add(tabItem);
-        }
 
         /// <summary>
         /// Закрытие вкладки

@@ -8,17 +8,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 using CefSharpTest.Interfaces;
+using Newtonsoft.Json;
 
 namespace CefSharpTest.Data
 {
     public class ContursManager : IContursManager
     {
-        public ContursManager(IList<IContur> conturs)
+        public ContursManager(IList<IContur> conturs,
+                              ITabManager tabManager)
         {
             _conturs = conturs;
-            ReadXml();
+            _tabManager = tabManager;
+            ReadJson();
 
-            RefreshConturs = new Command(ReadXml);
+            RefreshConturs = new Command(ReadJson);
         }
 
         /// <summary>
@@ -32,29 +35,46 @@ namespace CefSharpTest.Data
         IList<IContur> _conturs;
 
         /// <summary>
-        /// Считывает данные из xml файла
+        /// Управляющий вкладками
         /// </summary>
-        void ReadXml()
+        ITabManager _tabManager;
+
+        /// <summary>
+        /// Считывает данные из json файла
+        /// </summary>
+        void ReadJson()
         {
             _conturs.Clear();
 
+            var jsonSerializer = new JsonSerializer();
             var list = new List<Contur>();
-            var xmlFormatter = new XmlSerializer(typeof(List<Contur>));
-            using (Stream fStream = new FileStream(Properties.Settings.Default.DataOfConturs, FileMode.Open, FileAccess.Read, FileShare.None))
+
+            using (var fStream = new StreamReader("conturs.json"))
+            using (JsonReader jsonReader = new JsonTextReader(fStream))
             {
-                list = (List<Contur>)xmlFormatter.Deserialize(fStream);
+                list = jsonSerializer.Deserialize<List<Contur>>(jsonReader);
             }
 
             foreach (Contur item in list)
             {
+                item.OpenEvent += Item_OpenEvent;
                 _conturs.Add(item);
             }
         }
 
         /// <summary>
-        /// Создает тестовый пример xml файла
+        /// Обработчик события открытия вкладки
         /// </summary>
-        void CreateExample()
+        /// <param name="obj">Параметры контура</param>
+        void Item_OpenEvent(IContur obj)
+        {
+            _tabManager.AddTab(obj);
+        }
+
+        /// <summary>
+        /// Создает тестовый пример json файла
+        /// </summary>
+        void CreateExampleJSON()
         {
             var duck = new Contur() { Header = "DuckDuckGo", Addres = "duckduckgo.com" };
             var google = new Contur() { Header = "Google", Addres = "google.com" };
@@ -67,10 +87,13 @@ namespace CefSharpTest.Data
             listConturs.Add(ya);
             listConturs.Add(bing);
 
-            var xmlFormatter = new XmlSerializer(typeof(List<Contur>));
-            using (Stream fStream = new FileStream("Conturs.xml", FileMode.Create, FileAccess.Write, FileShare.None))
+            var jsonSerializer = new JsonSerializer();
+            jsonSerializer.Formatting = Formatting.Indented;
+
+            using (var fStream = new StreamWriter("conturs.json"))
+            using (JsonWriter jsWriter = new JsonTextWriter(fStream))
             {
-                xmlFormatter.Serialize(fStream, listConturs);
+                jsonSerializer.Serialize(jsWriter, listConturs);
             }
         }
     }
