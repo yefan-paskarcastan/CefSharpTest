@@ -2,28 +2,58 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Windows.Input;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using CefSharpTest.Interfaces;
 
 namespace CefSharpTest.Data
 {
-    public class ContursManager
+    public class ContursManager : IContursManager
     {
-        public ContursManager()
+        public ContursManager(IList<IContur> conturs)
         {
+            _conturs = conturs;
+            ReadXml();
+
+            RefreshConturs = new Command(ReadXml);
+        }
+
+        /// <summary>
+        /// Перечитать список контуров из файла
+        /// </summary>
+        public ICommand RefreshConturs { get; set; }
+
+        /// <summary>
+        /// Список контуров
+        /// </summary>
+        IList<IContur> _conturs;
+
+        /// <summary>
+        /// Считывает данные из xml файла
+        /// </summary>
+        void ReadXml()
+        {
+            _conturs.Clear();
+
+            var list = new List<Contur>();
             var xmlFormatter = new XmlSerializer(typeof(List<Contur>));
-            using (Stream fStream = new FileStream("Conturs.xml", FileMode.Open, FileAccess.Read, FileShare.None))
+            using (Stream fStream = new FileStream(Properties.Settings.Default.DataOfConturs, FileMode.Open, FileAccess.Read, FileShare.None))
             {
-                IList<Contur> list = (IList<Contur>)xmlFormatter.Deserialize(fStream);
-                foreach (var item in list)
-                {
-                    Debug.WriteLine(item.Header);
-                }
+                list = (List<Contur>)xmlFormatter.Deserialize(fStream);
+            }
+
+            foreach (Contur item in list)
+            {
+                _conturs.Add(item);
             }
         }
 
+        /// <summary>
+        /// Создает тестовый пример xml файла
+        /// </summary>
         void CreateExample()
         {
             var duck = new Contur() { Header = "DuckDuckGo", Addres = "duckduckgo.com" };

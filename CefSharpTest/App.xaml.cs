@@ -40,7 +40,10 @@ namespace CefSharpTest
         void RegisterComponents()
         {
             container.RegisterSingleton<IList<ITabItem>, ObservableCollection<ITabItem>>();
+            container.RegisterSingleton<IList<IContur>, ObservableCollection<IContur>>();
+
             container.RegisterService<ITabManager, TabManager>();
+            container.RegisterService<IContursManager, ContursManager>();
         }
 
         void RegisterViewModels()

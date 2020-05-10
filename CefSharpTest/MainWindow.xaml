@@ -11,9 +11,17 @@
         d:DataContext="{d:DesignInstance viewModel:MainViewModel}"
         Title="MainWindow" Height="450" Width="800" >
     <StackPanel x:Name="stackPanel">
-        <Menu VerticalAlignment="Top" >
-            <MenuItem Header="Tabs">
-                <MenuItem Header="New tab" Command="{Binding NewTab}"/>
+        <Menu VerticalAlignment="Top">
+            <MenuItem Header="Conturs" ItemsSource="{Binding Conturs}">
+                <MenuItem.ItemContainerStyle>
+                    <Style TargetType="MenuItem">
+                        <Setter Property="Header" Value="{Binding Header}"/>
+                        <Setter Property="Command" Value=""/>
+                    </Style>
+                </MenuItem.ItemContainerStyle>
+            </MenuItem>
+            <MenuItem Header="Misc" >
+                <MenuItem Header="Refresh list of conturs" Command="{Binding RefreshConturs}"/>
             </MenuItem>
         </Menu>
         <TabControl ItemsSource="{Binding Tabs}" 

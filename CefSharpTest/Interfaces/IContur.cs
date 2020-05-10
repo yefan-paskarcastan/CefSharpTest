@@ -3,27 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CefSharpTest.Interfaces;
 
-namespace CefSharpTest.Data
+namespace CefSharpTest.Interfaces
 {
-    [Serializable]
-    public class Contur : IContur
+    public interface IContur
     {
-
         /// <summary>
         /// Заголовок для вкладки по умолчанию
         /// </summary>
-        public string Header { get; set; }
+        string Header { get; set; }
 
         /// <summary>
         /// Адрес контура
         /// </summary>
-        public string Addres { get; set; }
+        string Addres { get; set; }
 
         /// <summary>
         /// Пользовательская папка для хранение кэша 
         /// </summary>
-        public string CustomCacheDir { get; set; }
+        string CustomCacheDir { get; set; }
     }
 }

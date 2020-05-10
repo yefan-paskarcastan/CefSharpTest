@@ -22,5 +22,17 @@ namespace CefSharpTest.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Conturs.xml")]
+        public string DataOfConturs {
+            get {
+                return ((string)(this["DataOfConturs"]));
+            }
+            set {
+                this["DataOfConturs"] = value;
+            }
+        }
     }
 }
