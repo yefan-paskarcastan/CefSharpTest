@@ -10,8 +10,8 @@
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance viewModel:MainViewModel}"
         Title="MainWindow" Height="450" Width="800" WindowState="Maximized" >
-    <StackPanel x:Name="stackPanel">
-        <Menu VerticalAlignment="Top">
+    <DockPanel>
+        <Menu VerticalAlignment="Top" DockPanel.Dock="Top">
             <MenuItem Header="Conturs" ItemsSource="{Binding Conturs}">
                 <MenuItem.ItemContainerStyle>
                     <Style TargetType="MenuItem">
@@ -24,30 +24,42 @@
                 <MenuItem Header="Refresh list of conturs" Command="{Binding RefreshConturs}"/>
             </MenuItem>
         </Menu>
-        <TabControl ItemsSource="{Binding Tabs}" 
-                    VerticalContentAlignment="Stretch" 
-                    HorizontalContentAlignment="Stretch" 
-                    Height="{Binding ActualHeight, ElementName=window, Mode=OneWay}">
-            <TabControl.ItemTemplate>
-                <DataTemplate>
-                    <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <TextBlock Text="{Binding Header}" />
-                        <Menu Background="{x:Null}">
-                            <MenuItem Header=">" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" Margin="10,0,0,0" Background="{DynamicResource {x:Static SystemColors.MenuBrushKey}}">
-                                <MenuItem Header="Close" Command="{Binding CloseTab}"/>
-                                <MenuItem Header="Dev Tools" Command="{Binding ShowDevTools}"/>
-                                <MenuItem Header="Test js" Command="{Binding RunJS}"/>
-                            </MenuItem>
-                        </Menu>
-                    </WrapPanel>
-                </DataTemplate>
-            </TabControl.ItemTemplate>
-            <TabControl.ContentTemplate>
-                <DataTemplate>
-                    <ContentControl Content="{Binding Browser}"
-                                    MouseBehaviours:MouseBehaviour.MouseMoveCommand="{Binding RunJS}"/>
-                </DataTemplate>
-            </TabControl.ContentTemplate>
-        </TabControl>
-    </StackPanel>
+        <Grid DockPanel.Dock="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="0.25*"/>
+            </Grid.ColumnDefinitions>
+
+            <TabControl ItemsSource="{Binding Tabs}" 
+                        VerticalContentAlignment="Stretch" 
+                        HorizontalContentAlignment="Stretch" 
+                        Grid.Column="0">
+                <TabControl.ItemTemplate>
+                    <DataTemplate>
+                        <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <TextBlock Text="{Binding Header}" />
+                            <Menu Background="{x:Null}">
+                                <MenuItem Header=">" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" Margin="10,0,0,0" Background="{DynamicResource {x:Static SystemColors.MenuBrushKey}}">
+                                    <MenuItem Header="Close" Command="{Binding CloseTab}"/>
+                                    <MenuItem Header="Dev Tools" Command="{Binding ShowDevTools}"/>
+                                    <MenuItem Header="Test js" Command="{Binding RunJS}"/>
+                                </MenuItem>
+                            </Menu>
+                        </WrapPanel>
+                    </DataTemplate>
+                </TabControl.ItemTemplate>
+                <TabControl.ContentTemplate>
+                    <DataTemplate>
+                        <ContentControl Content="{Binding Browser}"
+                                        MouseBehaviours:MouseBehaviour.MouseMoveCommand="{Binding RunJS}"/>
+                    </DataTemplate>
+                </TabControl.ContentTemplate>
+            </TabControl>
+            <GridSplitter Grid.Column="1" Width="3" HorizontalAlignment="Center" VerticalAlignment="Stretch"/>
+            <StackPanel Grid.Column="2" Orientation="Vertical">
+                
+            </StackPanel>
+        </Grid>
+    </DockPanel>
 </Window>
