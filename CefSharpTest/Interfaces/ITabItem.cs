@@ -31,6 +31,11 @@ namespace CefSharpTest.Interfaces
         /// </summary>
         ICommand CloseTab { get; }
 
+        /// <summary>
+        /// Отобразить DevTools
+        /// </summary>
+        ICommand ShowDevTools { get; }
+
         ICommand RunJS { get; }
 
         /// <summary>

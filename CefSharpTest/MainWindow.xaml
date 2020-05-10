@@ -9,7 +9,7 @@
         xmlns:MouseBehaviours="clr-namespace:CefSharpTest.MouseBehaviours"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance viewModel:MainViewModel}"
-        Title="MainWindow" Height="450" Width="800" >
+        Title="MainWindow" Height="450" Width="800" WindowState="Maximized" >
     <StackPanel x:Name="stackPanel">
         <Menu VerticalAlignment="Top">
             <MenuItem Header="Conturs" ItemsSource="{Binding Conturs}">
@@ -32,12 +32,13 @@
                 <DataTemplate>
                     <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                         <TextBlock Text="{Binding Header}" />
-                        <Button Margin="10,0,0,0" Width="20" Command="{Binding RunJS}">
-                            <TextBlock Text="JS"/>
-                        </Button>
-                        <Button Margin="10,0,0,0" Width="20" Command="{Binding CloseTab}">
-                            <TextBlock Text="X"/>
-                        </Button>
+                        <Menu Background="{x:Null}">
+                            <MenuItem Header=">" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" Margin="10,0,0,0" Background="{DynamicResource {x:Static SystemColors.MenuBrushKey}}">
+                                <MenuItem Header="Close" Command="{Binding CloseTab}"/>
+                                <MenuItem Header="Dev Tools" Command="{Binding ShowDevTools}"/>
+                                <MenuItem Header="Test js" Command="{Binding RunJS}"/>
+                            </MenuItem>
+                        </Menu>
                     </WrapPanel>
                 </DataTemplate>
             </TabControl.ItemTemplate>

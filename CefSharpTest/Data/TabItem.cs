@@ -33,6 +33,7 @@ namespace CefSharpTest.Data
             Browser.Address = contur.Address;
             CloseTab = new Command(OnCloseTab);
             RunJS = new Command(OnRunJS);
+            ShowDevTools = new Command(OnShowDevTools);
         }
 
         /// <summary>
@@ -59,6 +60,11 @@ namespace CefSharpTest.Data
         /// Команда закрытия вкладки
         /// </summary>
         public ICommand CloseTab { get; set; }
+
+        /// <summary>
+        /// Отобразить DevTools
+        /// </summary>
+        public ICommand ShowDevTools { get; set; }
 
         public ICommand RunJS { get; private set; }
 
@@ -98,6 +104,14 @@ namespace CefSharpTest.Data
                     }
                 });
             }
+        }
+
+        /// <summary>
+        /// Показать devtools
+        /// </summary>
+        void OnShowDevTools()
+        {
+            Browser.ShowDevTools();
         }
     }
 }
