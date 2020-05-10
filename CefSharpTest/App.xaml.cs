@@ -39,7 +39,7 @@ namespace CefSharpTest
 
         void RegisterComponents()
         {
-            container.RegisterSingleton<IList<TabItem>, ObservableCollection<TabItem>>();
+            container.RegisterSingleton<IList<ITabItem>, ObservableCollection<ITabItem>>();
             container.RegisterService<ITabManager, TabManager>();
         }
 

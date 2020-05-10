@@ -11,7 +11,7 @@ namespace CefSharpTest.Data
 {
     public class TabManager : ITabManager
     {
-        public TabManager(IList<TabItem> tabItems)
+        public TabManager(IList<ITabItem> tabItems)
         {
             string currDir = AppDomain.CurrentDomain.BaseDirectory;
 
@@ -30,7 +30,7 @@ namespace CefSharpTest.Data
         /// <summary>
         /// Коллекция вкладок
         /// </summary>
-        IList<TabItem> _tabs;
+        IList<ITabItem> _tabs;
 
         /// <summary>
         /// Обработчик добавления новой вкладки
@@ -48,7 +48,7 @@ namespace CefSharpTest.Data
         /// Закрытие вкладки
         /// </summary>
         /// <param name="obj"></param>
-        void TabItem_CloseTabEvent(TabItem obj)
+        void TabItem_CloseTabEvent(ITabItem obj)
         {
             _tabs.Remove(obj);
         }

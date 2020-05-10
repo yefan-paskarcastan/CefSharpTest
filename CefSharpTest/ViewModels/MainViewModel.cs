@@ -12,7 +12,7 @@ namespace CefSharpTest.ViewModels
 {
     public class MainViewModel : BaseViewModel
     {
-        public MainViewModel(IList<TabItem> tabItems, ITabManager tabManager)
+        public MainViewModel(IList<ITabItem> tabItems, ITabManager tabManager)
         {
             Tabs = tabItems;
             NewTab = tabManager.NewTab;
@@ -20,7 +20,7 @@ namespace CefSharpTest.ViewModels
             var ctr = new ContursManager();
         }
 
-        public IList<TabItem> Tabs { get; set; } 
+        public IList<ITabItem> Tabs { get; set; } 
 
         public ICommand NewTab { get; set; }
     }

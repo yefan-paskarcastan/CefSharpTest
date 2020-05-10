@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 using System.IO;
 using CefSharp.Wpf;
 using CefSharp;
-using CefSharpTest.ViewModels;
 using System.Windows.Input;
 using System.Diagnostics;
+using CefSharpTest.ViewModels;
+using CefSharpTest.Interfaces;
 
 namespace CefSharpTest.Data
 {
-    public class TabItem : BaseNotify
+    public class TabItem : BaseNotify, ITabItem
     {
         public TabItem()
         {

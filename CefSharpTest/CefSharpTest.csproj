@@ -97,6 +97,7 @@
     <Compile Include="Data\ContursManager.cs" />
     <Compile Include="Data\TabItem.cs" />
     <Compile Include="Data\TabManager.cs" />
+    <Compile Include="Interfaces\ITabItem.cs" />
     <Compile Include="Interfaces\ITabManager.cs" />
     <Compile Include="Services\MouseBehaviour.cs" />
     <Compile Include="Services\WindzorExtension.cs" />
