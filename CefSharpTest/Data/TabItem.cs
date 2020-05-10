@@ -32,7 +32,7 @@ namespace CefSharpTest.Data
             Header = contur.Header;
             Browser.Address = contur.Address;
             CloseTab = new Command(OnCloseTab);
-            RunJS = new Command(OnRunJS);
+            MainJS = new Command(OnMainJS);
             ShowDevTools = new Command(OnShowDevTools);
         }
 
@@ -66,7 +66,10 @@ namespace CefSharpTest.Data
         /// </summary>
         public ICommand ShowDevTools { get; set; }
 
-        public ICommand RunJS { get; private set; }
+        /// <summary>
+        /// Главый js, который выполняется при движении мышки
+        /// </summary>
+        public ICommand MainJS { get; private set; }
 
         /// <summary>
         /// Событие возникает при вызове команды закрытие вкладки
@@ -82,15 +85,19 @@ namespace CefSharpTest.Data
             CloseTabEvent?.Invoke(this);
         }
 
-        void OnRunJS()
+        /// <summary>
+        /// Обработчик команды запуска основного js файла
+        /// </summary>
+        void OnMainJS()
         {
-            string script = @"temp = function()
-                            {
-                                return document.getElementsByClassName(""onboarding-ed__title js-onboarding-ed-balance-text"")[0].textContent;
-                            };
-                            temp();";
+            string currDir = AppDomain.CurrentDomain.BaseDirectory;
+            string script = string.Empty;
+            using (var stream = new StreamReader(currDir + "\\js\\Test.js"))
+            {
+                script = stream.ReadToEnd();
+            }
 
-            if (!Browser.IsLoading)
+            if (!Browser.IsLoading && script != string.Empty)
             {
                 Browser.EvaluateScriptAsync(script).ContinueWith(x =>
                 {

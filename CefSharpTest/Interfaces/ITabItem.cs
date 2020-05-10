@@ -36,7 +36,10 @@ namespace CefSharpTest.Interfaces
         /// </summary>
         ICommand ShowDevTools { get; }
 
-        ICommand RunJS { get; }
+        /// <summary>
+        /// Главый js, который выполняется при движении мышки
+        /// </summary>
+        ICommand MainJS { get; }
 
         /// <summary>
         /// Событие возникает при вызове команды закрытие вкладки
