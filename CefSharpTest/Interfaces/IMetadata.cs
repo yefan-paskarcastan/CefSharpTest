@@ -1,4 +1,6 @@
-﻿namespace CefSharpTest.Interfaces
+﻿using System.Windows.Input;
+
+namespace CefSharpTest.Interfaces
 {
     /// <summary>
     /// Объект для возвращения данных из js
@@ -8,5 +10,7 @@
         string Label { get; set; }
 
         string Value { get; set; }
+
+        ICommand CopyValue { get; }
     }
 }

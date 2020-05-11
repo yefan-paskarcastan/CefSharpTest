@@ -67,6 +67,15 @@
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
+                            <GridViewColumn Header="Copy">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Command="{Binding CopyValue}" HorizontalAlignment="Right">
+                                            <TextBlock Text="Copy"/>
+                                        </Button>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
                             <GridViewColumn Header="Value">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
