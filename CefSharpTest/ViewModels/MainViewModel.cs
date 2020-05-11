@@ -14,6 +14,7 @@ namespace CefSharpTest.ViewModels
     {
         public MainViewModel(IList<ITabItem> tabItems, 
                              IList<IContur> conturs,
+                             IList<IMetadata> metadatas,
                              IContursManager contursManager)
         {
             Tabs = tabItems;
@@ -27,9 +28,14 @@ namespace CefSharpTest.ViewModels
         public IList<ITabItem> Tabs { get; set; } 
 
         /// <summary>
-        /// Список открытых контуров
+        /// Список доступных контуров
         /// </summary>
         public IList<IContur> Conturs { get; set; }
+
+        /// <summary>
+        /// Найденные метаданные
+        /// </summary>
+        public IList<IMetadata> Metadatas { get; set; }
 
         /// <summary>
         /// Перечитать список контуров из файла

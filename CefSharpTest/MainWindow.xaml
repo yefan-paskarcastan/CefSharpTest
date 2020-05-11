@@ -56,9 +56,28 @@
                 </TabControl.ContentTemplate>
             </TabControl>
             <GridSplitter Grid.Column="1" Width="3" HorizontalAlignment="Center" VerticalAlignment="Stretch"/>
-            <StackPanel Grid.Column="2" Orientation="Vertical">
-                
-            </StackPanel>
+            <ListView Grid.Column="2" ItemsSource="{Binding Metadatas}">
+                <ListView.View>
+                    <GridView>
+                        <GridView.Columns>
+                            <GridViewColumn Header="Label">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Label}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Value">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox IsReadOnly="True" Text="{Binding Value}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView.Columns>
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </Grid>
     </DockPanel>
 </Window>

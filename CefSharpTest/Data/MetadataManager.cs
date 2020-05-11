@@ -20,7 +20,10 @@ namespace CefSharpTest.Data
         /// <param name="collection">Словарь с метаданными</param>
         public void Refresh(IDictionary<string, object> collection)
         {
-            _metadatas.Clear();
+            App.Current.Dispatcher.Invoke(new Action(() =>
+            {
+                _metadatas.Clear();
+            }));
 
             foreach (var item in collection)
             {
@@ -29,7 +32,10 @@ namespace CefSharpTest.Data
                     Label = item.Key,
                     Value = (string)item.Value,
                 };
-                _metadatas.Add(meta);
+                App.Current.Dispatcher.Invoke(new Action(() =>
+                {
+                    _metadatas.Add(meta);
+                }));
             }
         }
 
