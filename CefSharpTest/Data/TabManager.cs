@@ -11,7 +11,8 @@ namespace CefSharpTest.Data
 {
     public class TabManager : ITabManager
     {
-        public TabManager(IList<ITabItem> tabItems)
+        public TabManager(IList<ITabItem> tabItems,
+                          IMetadataManager metadataManager)
         {
             string currDir = AppDomain.CurrentDomain.BaseDirectory;
 
@@ -19,6 +20,7 @@ namespace CefSharpTest.Data
                 Directory.Delete(currDir + "\\Cache", true);
 
             _tabs = tabItems;
+            _metadataManager = metadataManager;
         }
 
         /// <summary>
@@ -29,6 +31,7 @@ namespace CefSharpTest.Data
         {
             var tabItem = new TabItem(contur);
             tabItem.CloseTabEvent += TabItem_CloseTabEvent;
+            tabItem.MainJSEvent += TabItem_MainJSEvent;
 
             _tabs.Add(tabItem);
         }
@@ -39,12 +42,26 @@ namespace CefSharpTest.Data
         IList<ITabItem> _tabs;
 
         /// <summary>
+        /// Управление метаданными
+        /// </summary>
+        IMetadataManager _metadataManager;
+
+        /// <summary>
         /// Закрытие вкладки
         /// </summary>
         /// <param name="obj"></param>
         void TabItem_CloseTabEvent(ITabItem obj)
         {
             _tabs.Remove(obj);
+        }
+
+        /// <summary>
+        /// Выполнение основного js
+        /// </summary>
+        /// <param name="obj">Результат выполнения</param>
+        void TabItem_MainJSEvent(IDictionary<string, object> obj)
+        {
+            _metadataManager.Refresh(obj);
         }
     }
 }

@@ -45,5 +45,10 @@ namespace CefSharpTest.Interfaces
         /// Событие возникает при вызове команды закрытие вкладки
         /// </summary>
         event Action<TabItem> CloseTabEvent;
+
+        /// <summary>
+        /// Событие возникает когда основной js возвращает результат выполнения
+        /// </summary>
+        event Action<IDictionary<string, object>> MainJSEvent;
     }
 }

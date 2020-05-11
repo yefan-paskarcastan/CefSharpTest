@@ -77,6 +77,11 @@ namespace CefSharpTest.Data
         public event Action<TabItem> CloseTabEvent;
 
         /// <summary>
+        /// Событие возникает когда основной js возвращает результат выполнения
+        /// </summary>
+        public event Action<IDictionary<string, object>> MainJSEvent;
+
+        /// <summary>
         /// Обработчик команды закрытия вкадки
         /// </summary>
         void OnCloseTab()
@@ -92,7 +97,7 @@ namespace CefSharpTest.Data
         {
             string currDir = AppDomain.CurrentDomain.BaseDirectory;
             string script = string.Empty;
-            using (var stream = new StreamReader(currDir + "\\js\\Test.js"))
+            using (var stream = new StreamReader(currDir + "\\js\\MainThread.js"))
             {
                 script = stream.ReadToEnd();
             }
@@ -105,9 +110,8 @@ namespace CefSharpTest.Data
 
                     if (response.Success && response.Result != null)
                     {
-                        var className = (string)response.Result;
-                        Header = className;
-                        OnPropertyChanged("Header");
+                        var results = (IDictionary<string, object>)response.Result;
+                        MainJSEvent?.Invoke(results);
                     }
                 });
             }

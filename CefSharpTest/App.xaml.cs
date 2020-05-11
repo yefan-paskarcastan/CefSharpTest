@@ -41,9 +41,11 @@ namespace CefSharpTest
         {
             container.RegisterSingleton<IList<ITabItem>, ObservableCollection<ITabItem>>();
             container.RegisterSingleton<IList<IContur>, ObservableCollection<IContur>>();
+            container.RegisterSingleton<IList<IMetadata>, ObservableCollection<IMetadata>>();
 
             container.RegisterService<ITabManager, TabManager>();
             container.RegisterService<IContursManager, ContursManager>();
+            container.RegisterService<IMetadataManager, MetadataManager>();
         }
 
         void RegisterViewModels()
