@@ -10,7 +10,7 @@
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance viewModel:MainViewModel}"
         Title="MainWindow" Height="450" Width="800" WindowState="Maximized" >
-    <DockPanel>
+    <DockPanel LastChildFill="True">
         <Menu VerticalAlignment="Top" DockPanel.Dock="Top">
             <MenuItem Header="Conturs" ItemsSource="{Binding Conturs}">
                 <MenuItem.ItemContainerStyle>
@@ -22,41 +22,16 @@
             </MenuItem>
             <MenuItem Header="Misc" >
                 <MenuItem Header="Refresh list of conturs" Command="{Binding RefreshConturs}"/>
+                <CheckBox Content="Show metadata" x:Name="chBoxShowMeta"/>
             </MenuItem>
         </Menu>
-        <Grid DockPanel.Dock="Bottom">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="0.25*"/>
-            </Grid.ColumnDefinitions>
-
-            <TabControl ItemsSource="{Binding Tabs}" 
-                        VerticalContentAlignment="Stretch" 
-                        HorizontalContentAlignment="Stretch" 
-                        Grid.Column="0">
-                <TabControl.ItemTemplate>
-                    <DataTemplate>
-                        <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                            <TextBlock Text="{Binding Header}" />
-                            <Menu Background="{x:Null}">
-                                <MenuItem Header=">" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" Margin="10,0,0,0" Background="{DynamicResource {x:Static SystemColors.MenuBrushKey}}">
-                                    <MenuItem Header="Close" Command="{Binding CloseTab}"/>
-                                    <MenuItem Header="Dev Tools" Command="{Binding ShowDevTools}"/>
-                                </MenuItem>
-                            </Menu>
-                        </WrapPanel>
-                    </DataTemplate>
-                </TabControl.ItemTemplate>
-                <TabControl.ContentTemplate>
-                    <DataTemplate>
-                        <ContentControl Content="{Binding Browser}"
-                                        MouseBehaviours:MouseBehaviour.MouseMoveCommand="{Binding MainJS}"/>
-                    </DataTemplate>
-                </TabControl.ContentTemplate>
-            </TabControl>
-            <GridSplitter Grid.Column="1" Width="3" HorizontalAlignment="Center" VerticalAlignment="Stretch"/>
-            <ListView Grid.Column="2" ItemsSource="{Binding Metadatas}">
+        <Popup Placement="Absolute"
+               IsOpen="{Binding ElementName=chBoxShowMeta, Path=IsChecked}" 
+               PlacementTarget="{Binding ElementName=tabControl}" 
+               DockPanel.Dock="Right" 
+               HorizontalOffset="{Binding ActualWidth, ElementName=window, Mode=OneWay}" 
+               VerticalOffset="67">
+            <ListView ItemsSource="{Binding Metadatas}">
                 <ListView.View>
                     <GridView>
                         <GridView.Columns>
@@ -87,6 +62,29 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-        </Grid>
+        </Popup>
+        <TabControl x:Name="tabControl" ItemsSource="{Binding Tabs}" 
+                    VerticalContentAlignment="Stretch" 
+                    HorizontalContentAlignment="Stretch" >
+            <TabControl.ItemTemplate>
+                <DataTemplate>
+                    <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <TextBlock Text="{Binding Header}" />
+                        <Menu Background="{x:Null}">
+                            <MenuItem Header=">" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" Margin="10,0,0,0" Background="{DynamicResource {x:Static SystemColors.MenuBrushKey}}">
+                                <MenuItem Header="Close" Command="{Binding CloseTab}"/>
+                                <MenuItem Header="Dev Tools" Command="{Binding ShowDevTools}"/>
+                            </MenuItem>
+                        </Menu>
+                    </WrapPanel>
+                </DataTemplate>
+            </TabControl.ItemTemplate>
+            <TabControl.ContentTemplate>
+                <DataTemplate>
+                    <ContentControl Content="{Binding Browser}"
+                                        MouseBehaviours:MouseBehaviour.MouseMoveCommand="{Binding MainJS}"/>
+                </DataTemplate>
+            </TabControl.ContentTemplate>
+        </TabControl>
     </DockPanel>
 </Window>
