@@ -8,12 +8,14 @@ namespace CefSharpTest.Data
     /// <summary>
     /// Объект для возвращения данных из js
     /// </summary>
-    public class Metadata : IMetadata
+    public class Metadata : BaseNotify, IMetadata
     {
         public Metadata()
         {
             CopyValue = new Command(OnCopyValue);
         }
+
+        string _value;
 
         /// <summary>
         /// Метка, описывающая значение
@@ -23,7 +25,11 @@ namespace CefSharpTest.Data
         /// <summary>
         /// Значение
         /// </summary>
-        public string Value { get; set; }
+        public string Value 
+        { 
+            get { return _value; } 
+            set { _value = value; OnPropertyChanged(); }
+        }
 
         /// <summary>
         /// Положить значение в буфер обмена

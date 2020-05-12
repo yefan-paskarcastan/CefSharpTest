@@ -32,6 +32,16 @@ namespace CefSharpTest.Data
         public string CustomCacheDir { get; set; }
 
         /// <summary>
+        /// Игнорировать ошибки SSL сертификатов
+        /// </summary>
+        public bool IgnoreCertificateErrors { get; set; } = true;
+
+        /// <summary>
+        /// Сохранять куки
+        /// </summary>
+        public bool PersistSessionCookies { get; set; } = true;
+
+        /// <summary>
         /// Отрыть выбранный контур
         /// </summary>
         [JsonIgnore]

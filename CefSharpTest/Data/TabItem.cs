@@ -22,8 +22,8 @@ namespace CefSharpTest.Data
             DirectoryInfo dirInfo = Directory.CreateDirectory(currDir + "\\Cache\\Inst" + Index);
             var settings = new RequestContextSettings
             {
-                IgnoreCertificateErrors = true,
-                PersistSessionCookies = false,
+                IgnoreCertificateErrors = contur.IgnoreCertificateErrors,
+                PersistSessionCookies = contur.PersistSessionCookies,
                 CachePath = dirInfo.FullName,
             };
 

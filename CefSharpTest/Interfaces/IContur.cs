@@ -25,6 +25,16 @@ namespace CefSharpTest.Interfaces
         string CustomCacheDir { get; set; }
 
         /// <summary>
+        /// Игнорировать ошибки SSL сертификатов
+        /// </summary>
+        bool IgnoreCertificateErrors { get; set; }
+
+        /// <summary>
+        /// Сохранять куки
+        /// </summary>
+        bool PersistSessionCookies { get; set; }
+
+        /// <summary>
         /// Отрыть выбранный контур
         /// </summary>
         ICommand Open { get; }

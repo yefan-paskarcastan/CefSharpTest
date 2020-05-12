@@ -29,11 +29,18 @@ namespace CefSharpTest.Data
                 };
                 App.Current.Dispatcher.Invoke(new Action(() =>
                 {
-                    if(_metadatas.Contains(meta))
+                    int result = _metadatas.IndexOf(meta);
+                    if (result == -1 &&
+                        !string.IsNullOrWhiteSpace(meta.Value))
                     {
-                        _metadatas.Remove(meta);
+                        _metadatas.Add(meta);
+                        return;
                     }
-                    _metadatas.Add(meta);
+                    if (result != -1 &&
+                        _metadatas[result].Value != meta.Value)
+                    {
+                        _metadatas[result].Value = meta.Value;
+                    }
                 }));
             }
         }
